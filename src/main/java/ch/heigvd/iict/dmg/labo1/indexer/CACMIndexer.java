@@ -2,9 +2,7 @@ package ch.heigvd.iict.dmg.labo1.indexer;
 
 import ch.heigvd.iict.dmg.labo1.parsers.ParserListener;
 import org.apache.lucene.analysis.Analyzer;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.document.Field;
-import org.apache.lucene.document.FieldType;
+import org.apache.lucene.document.*;
 import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
@@ -58,13 +56,19 @@ public class CACMIndexer implements ParserListener {
         fieldType.setTokenized(true);
         fieldType.freeze();
 
-        Field fieldId = new Field("id",Long.toString(id),fieldType);
-        Field fieldAuthors = new Field("authors",authors,fieldType);
-        Field fieldTitle = new Field("title",title,fieldType);
-        Field fieldSummary = new Field("summary",summary,fieldType);
+        Field fieldId = new LongPoint("id", id);
+
+        // authors might be "author1; author2"
+		String[] authorsArray = authors.split(";");
+		for (String authorName : authorsArray) {
+			Field author = new StringField("author", authorName, Field.Store.YES);
+			doc.add(author);
+		}
+
+        Field fieldTitle = new StringField("title",title, Field.Store.YES);
+        Field fieldSummary = new TextField("summary",summary, Field.Store.YES);
 
         doc.add(fieldId);
-        doc.add(fieldAuthors);
         doc.add(fieldTitle);
         doc.add(fieldSummary);
 
