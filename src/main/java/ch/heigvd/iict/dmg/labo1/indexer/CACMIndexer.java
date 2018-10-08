@@ -61,7 +61,7 @@ public class CACMIndexer implements ParserListener {
         // authors might be "author1; author2"
 		String[] authorsArray = authors.split(";");
 		for (String authorName : authorsArray) {
-			Field author = new StringField("author", authorName, Field.Store.YES);
+			Field author = new StringField("authors", authorName, Field.Store.YES);
 			doc.add(author);
 		}
 

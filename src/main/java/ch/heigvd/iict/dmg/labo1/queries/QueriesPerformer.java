@@ -85,7 +85,9 @@ public class QueriesPerformer {
 
             for(ScoreDoc hit:hits){
                 Document doc = indexSearcher.doc(hit.doc);
-                System.out.println((doc.get(("id") + ": " + doc.get("title") + " (" + hit.score + ")")));
+                System.out.println((hit.doc + ": " + doc.get("title") + " (" + hit.score + ")"));
+                //System.out.println(doc.get("id"));
+
             }
 
         } catch (IOException e) {
