@@ -57,6 +57,7 @@ public class CACMIndexer implements ParserListener {
         fieldType.freeze();
 
         Field fieldId = new LongPoint("id", id);
+        StoredField storedId = new StoredField("id", id);
 
         // authors might be "author1; author2"
 		String[] authorsArray = authors.split(";");
@@ -69,6 +70,7 @@ public class CACMIndexer implements ParserListener {
         Field fieldSummary = new TextField("summary",summary, Field.Store.YES);
 
         doc.add(fieldId);
+        doc.add(storedId);
         doc.add(fieldTitle);
         doc.add(fieldSummary);
 
