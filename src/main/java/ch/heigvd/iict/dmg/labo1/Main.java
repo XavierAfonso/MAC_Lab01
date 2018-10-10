@@ -5,8 +5,11 @@ import ch.heigvd.iict.dmg.labo1.parsers.CACMParser;
 import ch.heigvd.iict.dmg.labo1.queries.QueriesPerformer;
 import ch.heigvd.iict.dmg.labo1.similarities.MySimilarity;
 import org.apache.lucene.analysis.Analyzer;
+import org.apache.lucene.analysis.en.EnglishAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.apache.lucene.search.similarities.Similarity;
+
+import java.util.Scanner;
 
 public class Main {
 
@@ -56,9 +59,26 @@ public class Main {
 	}
 
 	private static Analyzer getAnalyzer() {
-	    // TODO student... For the part "Indexing and Searching CACM collection
 
-		return new StandardAnalyzer();
+		// TODO student... For the part "Indexing and Searching CACM collection
+
+		System.out.println("Choose Analyzer : ");
+		System.out.println("1 -> StandardAnalyzer");
+		System.out.println("2 -> EnglishAnalyzer");
+
+		Scanner sc = new Scanner(System.in);
+		int i = sc.nextInt();
+
+		if(i ==1){
+			return new StandardAnalyzer();
+		}
+		else if (i == 2){
+			return new EnglishAnalyzer();
+		}
+		else{
+			return null;
+		}
+
 		// - Indexing" use, as indicated in the instructions,
 		// the StandardAnalyzer class.
 		//

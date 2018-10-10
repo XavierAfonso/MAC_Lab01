@@ -50,14 +50,14 @@ public class QueriesPerformer {
 		// See "Reading Index".
 	    System.out.println("Top ranking terms for field ["  + field +"] are: ");
 
-        HighFreqTerms.TotalTermFreqComparator cmp = new HighFreqTerms.TotalTermFreqComparator();
+        HighFreqTerms.DocFreqComparator cmp = new HighFreqTerms.DocFreqComparator();
 
         try {
             TermStats[] highFreqTerms = HighFreqTerms.getHighFreqTerms(indexReader,numTerms,field,cmp);
 
             List<String> terms = new ArrayList<>(highFreqTerms.length);
             for (TermStats ts : highFreqTerms) {
-                System.out.println(ts);
+                System.out.println(ts.termtext.utf8ToString() + " : " + ts.docFreq);
             }
 
         } catch (Exception e) {
