@@ -16,23 +16,23 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 public class CACMIndexer implements ParserListener {
-	
+
 	private Directory 	dir 			= null;
 	private IndexWriter indexWriter 	= null;
-	
+
 	private Analyzer 	analyzer 		= null;
 	private Similarity 	similarity 		= null;
-	
+
 	public CACMIndexer(Analyzer analyzer, Similarity similarity) {
 		this.analyzer = analyzer;
 		this.similarity = similarity;
 	}
-	
+
 	public void openIndex() {
 		// 1.2. create an index writer config
 		IndexWriterConfig iwc = new IndexWriterConfig(analyzer);
 		iwc.setOpenMode(OpenMode.CREATE); // create and replace existing index
-		iwc.setUseCompoundFile(false); // not pack newly written segments in a compound file: 
+		iwc.setUseCompoundFile(false); // not pack newly written segments in a compound file:
 		//keep all segments of index separately on disk
 		if(similarity != null)
 			iwc.setSimilarity(similarity);
@@ -45,34 +45,45 @@ public class CACMIndexer implements ParserListener {
 			e.printStackTrace();
 		}
 	}
-	
+
 	@Override
 	public void onNewDocument(Long id, String authors, String title, String summary) {
 
 		Document doc = new Document();
 
-        FieldType fieldType = new FieldType();
-        fieldType.setIndexOptions(IndexOptions.DOCS);
-        fieldType.setTokenized(true);
-        fieldType.freeze();
+		// Response to 'What should be added to the code to have access to the term vector
+		//in the index?' TV = Term Vector
 
-        Field fieldId = new LongPoint("id", id);
-        StoredField storedId = new StoredField("id", id);
+		/*FieldType fieldType = new FieldType();
+		fieldType.setIndexOptions(IndexOptions.DOCS);
+		fieldType.setTokenized(true);
+		fieldType.setStored(true);
+		fieldType.setStoreTermVectors(true);
+		fieldType.setStoreTermVectorOffsets(true);
+		fieldType.setStoreTermVectorPositions(true);
+		fieldType.freeze();*/
 
-        // authors might be "author1; author2"
+		Field fieldId = new LongPoint("id", id);
+		StoredField storedId = new StoredField("id", id);
+
+		// authors might be "author1; author2"
 		String[] authorsArray = authors.split(";");
 		for (String authorName : authorsArray) {
 			Field author = new StringField("authors", authorName, Field.Store.YES);
+			//Field author = new Field("authors", authorName, fieldType); //TV
 			doc.add(author);
 		}
 
-        Field fieldTitle = new StringField("title",title, Field.Store.YES);
-        Field fieldSummary = new TextField("summary",summary, Field.Store.YES);
+		Field fieldTitle = new StringField("title",title, Field.Store.YES);
+		//Field fieldTitle = new Field("title",title, fieldType); //TV
 
-        doc.add(fieldId);
-        doc.add(storedId);
-        doc.add(fieldTitle);
-        doc.add(fieldSummary);
+		Field fieldSummary = new TextField("summary",summary, Field.Store.YES);
+		//Field fieldSummary = new Field("summary",summary,fieldType); //TV
+
+		doc.add(fieldId);
+		doc.add(storedId);
+		doc.add(fieldTitle);
+		doc.add(fieldSummary);
 
 		// TODO student: add to the document "doc" the fields given in
 		// parameters. You job is to use the right Field and FieldType
@@ -84,7 +95,7 @@ public class CACMIndexer implements ParserListener {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void finalizeIndex() {
 		if(this.indexWriter != null)
 			try { this.indexWriter.close(); } catch(IOException e) { /* BEST EFFORT */ }
