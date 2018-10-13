@@ -55,7 +55,6 @@ public class QueriesPerformer {
         try {
             TermStats[] highFreqTerms = HighFreqTerms.getHighFreqTerms(indexReader,numTerms,field,cmp);
 
-            List<String> terms = new ArrayList<>(highFreqTerms.length);
             for (TermStats ts : highFreqTerms) {
                 System.out.println(ts.termtext.utf8ToString() + " : " + ts.docFreq);
             }
@@ -73,14 +72,20 @@ public class QueriesPerformer {
         Query query = null;
 
         QueryParser parser = new QueryParser("summary",analyzer);
+
         try {
             query = parser.parse(q);
+            System.out.println("text of the query : " + query);
         } catch (ParseException e) {
             e.printStackTrace();
         }
 
         try {
             ScoreDoc[] hits = indexSearcher.search(query,10).scoreDocs;
+
+            int nb = indexSearcher.count(query);
+
+            System.out.println("text of the query : " + nb);
 
             for(ScoreDoc hit : hits){
                 Document doc = indexSearcher.doc(hit.doc);
