@@ -4,7 +4,6 @@ import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.Document;
 import org.apache.lucene.index.DirectoryReader;
 import org.apache.lucene.index.IndexReader;
-import org.apache.lucene.index.TermState;
 import org.apache.lucene.misc.HighFreqTerms;
 import org.apache.lucene.misc.TermStats;
 import org.apache.lucene.queryparser.classic.ParseException;
@@ -19,9 +18,6 @@ import org.apache.lucene.store.FSDirectory;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
 
 public class QueriesPerformer {
 	
@@ -45,9 +41,7 @@ public class QueriesPerformer {
 	}
 
 	public void printTopRankingTerms(String field, int numTerms) {
-		// TODO student
-		// This methods print the top ranking term for a field.
-		// See "Reading Index".
+
 	    System.out.println("Top ranking terms for field ["  + field +"] are: ");
 
         HighFreqTerms.DocFreqComparator cmp = new HighFreqTerms.DocFreqComparator();
@@ -65,8 +59,8 @@ public class QueriesPerformer {
     }
 	
 	public void query(String q) {
-		// TODO student
-		// See "Searching" section
+
+
         System.out.println("Searching for [" + q +"]");
 
         Query query = null;
@@ -85,7 +79,7 @@ public class QueriesPerformer {
 
             int nb = indexSearcher.count(query);
 
-            System.out.println("text of the query : " + nb);
+            System.out.println("total number of results : " + nb);
 
             for(ScoreDoc hit : hits){
                 Document doc = indexSearcher.doc(hit.doc);

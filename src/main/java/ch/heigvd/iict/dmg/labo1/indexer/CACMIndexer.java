@@ -3,7 +3,6 @@ package ch.heigvd.iict.dmg.labo1.indexer;
 import ch.heigvd.iict.dmg.labo1.parsers.ParserListener;
 import org.apache.lucene.analysis.Analyzer;
 import org.apache.lucene.document.*;
-import org.apache.lucene.index.IndexOptions;
 import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.IndexWriterConfig;
 import org.apache.lucene.index.IndexWriterConfig.OpenMode;
@@ -51,10 +50,10 @@ public class CACMIndexer implements ParserListener {
 
 		Document doc = new Document();
 
-		// Response to 'What should be added to the code to have access to the term vector
-		//in the index?' TV = Term Vector
+		/* Response to 'What should be added to the code to have access to the term vector
+		in the index?' TV = Term Vector
 
-		/*FieldType fieldType = new FieldType();
+		FieldType fieldType = new FieldType();
 		fieldType.setIndexOptions(IndexOptions.DOCS);
 		fieldType.setTokenized(true);
 		fieldType.setStored(true);
@@ -85,9 +84,6 @@ public class CACMIndexer implements ParserListener {
 		doc.add(fieldTitle);
 		doc.add(fieldSummary);
 
-		// TODO student: add to the document "doc" the fields given in
-		// parameters. You job is to use the right Field and FieldType
-		// for these parameters.
 
 		try {
 			this.indexWriter.addDocument(doc);

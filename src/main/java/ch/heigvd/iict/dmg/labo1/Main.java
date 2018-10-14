@@ -44,13 +44,13 @@ public class Main {
     }
 
     private static void readingIndex(QueriesPerformer queriesPerformer) {
+
         queriesPerformer.printTopRankingTerms("authors", 10);
         queriesPerformer.printTopRankingTerms("title", 10);
     }
 
     private static void searching(QueriesPerformer queriesPerformer) {
 
-        // TODO student
         queriesPerformer.query("Information Retrieval");
         queriesPerformer.query("Information AND Retrieval");
         queriesPerformer.query("+Retrieval information -Database");
@@ -59,8 +59,6 @@ public class Main {
     }
 
     private static Analyzer getAnalyzer() {
-
-        // TODO student... For the part "Indexing and Searching CACM collection
 
         System.out.println("Choose Analyzer : ");
         System.out.println("1 -> StandardAnalyzer");
