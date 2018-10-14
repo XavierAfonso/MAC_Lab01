@@ -14,6 +14,8 @@ import org.apache.lucene.search.similarities.Similarity;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.time.Duration;
+import java.time.Instant;
 import java.util.Scanner;
 
 public class Main {
@@ -26,11 +28,16 @@ public class Main {
         // TODO student "Tuning the Lucene Score"
         Similarity similarity = new MySimilarity();
 
+        Instant start = Instant.now();
         CACMIndexer indexer = new CACMIndexer(analyser, similarity);
         indexer.openIndex();
         CACMParser parser = new CACMParser("documents/cacm.txt", indexer);
         parser.startParsing();
         indexer.finalizeIndex();
+        Instant end = Instant.now();
+
+        Duration timeElapsed = Duration.between(start,end);
+        System.out.println("Time taken: " + timeElapsed.toMillis() + " milliseconds");
 
         QueriesPerformer queriesPerformer = new QueriesPerformer(analyser, similarity);
 
