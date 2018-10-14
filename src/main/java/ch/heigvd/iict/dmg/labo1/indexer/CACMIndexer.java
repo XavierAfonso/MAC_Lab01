@@ -62,28 +62,30 @@ public class CACMIndexer implements ParserListener {
 		fieldType.setStoreTermVectorPositions(true);
 		fieldType.freeze();*/
 
+		// Id
 		Field fieldId = new LongPoint("id", id);
 		StoredField storedId = new StoredField("id", id);
 
-		// authors might be "author1; author2"
-		String[] authorsArray = authors.split(";");
+		// Authors
+		String[] authorsArray = authors.split(";"); // authors might be "author1; author2; ..."
 		for (String authorName : authorsArray) {
-			Field author = new StringField("authors", authorName, Field.Store.YES);
+			Field author = new TextField("authors", authorName, Field.Store.YES);
 			//Field author = new Field("authors", authorName, fieldType); //TV
 			doc.add(author);
 		}
 
-		Field fieldTitle = new StringField("title",title, Field.Store.YES);
+		// Title
+		Field fieldTitle = new TextField("title", title, Field.Store.YES);
 		//Field fieldTitle = new Field("title",title, fieldType); //TV
 
-		Field fieldSummary = new TextField("summary",summary, Field.Store.YES);
+		// Summary
+		Field fieldSummary = new TextField("summary", summary, Field.Store.YES);
 		//Field fieldSummary = new Field("summary",summary,fieldType); //TV
 
 		doc.add(fieldId);
 		doc.add(storedId);
 		doc.add(fieldTitle);
 		doc.add(fieldSummary);
-
 
 		try {
 			this.indexWriter.addDocument(doc);
