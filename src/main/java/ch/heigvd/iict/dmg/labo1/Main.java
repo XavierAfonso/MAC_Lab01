@@ -62,7 +62,8 @@ public class Main {
         queriesPerformer.query("Information AND Retrieval");
         queriesPerformer.query("+Retrieval information -Database");
         queriesPerformer.query("Info*");
-        queriesPerformer.query("Information Retrieval~5");
+        queriesPerformer.query("\'Information Retrieval\'~5");
+        queriesPerformer.query("compiler program");
     }
 
     private static Analyzer getAnalyzer() {
