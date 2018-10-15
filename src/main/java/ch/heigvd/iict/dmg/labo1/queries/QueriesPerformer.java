@@ -59,13 +59,13 @@ public class QueriesPerformer {
     }
 	
 	public void query(String q) {
-
+	    String field = "summary"; // search field
 
         System.out.println("Searching for [" + q +"]");
 
         Query query = null;
 
-        QueryParser parser = new QueryParser("summary",analyzer);
+        QueryParser parser = new QueryParser(field, analyzer);
 
         try {
             query = parser.parse(q);
