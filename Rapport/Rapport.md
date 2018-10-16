@@ -165,11 +165,10 @@ Il y a plus de livres ayant un auteur inconnu mais l’auteur qui a le nombre de
 
 Cependant, comme nous utilisons un `StringField` pour le champ de l'auteur, il va tokeniser le nom en entier. Le champ devra donc être identique pour pouvoir être compté correctement. Thacher Jr., H. C. apparait réellement 41 fois dans le fichier cacm.txt mais avec quelques formes légèrement différentes. Par exemple à la ligne 735, avec un espace en moins. Certains auteurs seront donc sous-évalués.
 
-Une solution serait d'utiliser un `Textfield` pour pouvoir créer plusieurs tokens pour un auteur malheureusement avec cette approche, les initiales seront tockenisées et deviendraient les meilleures réponses. De plus, si des auteurs partagent le même nom de famille ou prénom cette solution ne peut pas marcher. Ce qu'on constate avec **Smith** dans le résultats suivant (dont on a enlevé les initiales de prénoms)
+Une solution serait d'utiliser un `Textfield` pour pouvoir créer plusieurs tokens pour un auteur malheureusement avec cette approche, les initiales seront tokenisées et deviendraient les meilleures réponses. De plus, si des auteurs partagent le même nom de famille ou prénom cette solution ne peut pas marcher. Ce qu'on constate avec *Smith* dans le résultats suivant (dont on a enlevé les initiales de prénoms)
 
 ```
 Top ranking terms for field [authors] are: 
-
 smith : 43
 thacher : 41
 hill : 23
