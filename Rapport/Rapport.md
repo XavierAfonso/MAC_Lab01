@@ -1,7 +1,7 @@
 
 # <center>Indexing and Search with Apache Lucene</center>
 ### <center>Lab N°1</center>
-#### <center>Xavier Afonso & Joël Kaufmann</center>
+#### <center>Xavier Vaz Afonso & Joël Kaufmann</center>
 
 ### Understanding the Lucene API
 
@@ -146,7 +146,7 @@ StopAnalyzer</br>
 
 
 #### Reading Index
-Utilisation d'un StandardAnalyzer avec ClassicSimilarity.
+Utilisation d'un `StandardAnalyzer` avec `ClassicSimilarity`.
 ##### *1. What is the author with the highest number of publications? How many publications does he/she have?*
 ```
 Top ranking terms for field [authors] are:
@@ -162,6 +162,27 @@ Boothroyd, J. : 14
 George, R. : 12
 ```
 Il y a plus de livres ayant un auteur inconnu mais l’auteur qui a le nombre de publications le plus élevé est Thacher Jr., H. C.
+
+Cependant, comme nous utilisons un `StringField` pour le champ de l'auteur, il va tokeniser le nom en entier. Le champ devra donc être identique pour pouvoir être compté correctement. Thacher Jr., H. C. apparait réellement 41 fois dans le fichier cacm.txt mais avec quelques formes légèrement différentes. Par exemple à la ligne 735, avec un espace en moins. Certains auteurs seront donc sous-évalués.
+
+Une solution serait d'utiliser un `Textfield` pour pouvoir créer plusieurs tokens pour un auteur malheureusement avec cette approche, les initiales seront tockenisées et deviendraient les meilleures réponses. De plus, si des auteurs partagent le même nom de famille ou prénom cette solution ne peut pas marcher. Ce qu'on constate avec **Smith** dans le résultats suivant (dont on a enlevé les initiales de prénoms)
+
+```
+Top ranking terms for field [authors] are: 
+
+smith : 43
+thacher : 41
+hill : 23
+naur : 19
+herndon : 18
+wirth : 16
+brown : 15
+pike : 14
+graham : 14
+gautschi : 14
+```
+
+
 
 ##### *2. List the top 10 terms in the title field with their frequency.*
 ```
