@@ -88,7 +88,7 @@ doc.add(fieldSummary);
 </br>
 
 #### Using different Analyzers
-Nous avons utilisé la classe `ClassicSimilarity` pour tous le projet, sauf pour la dernière question qui demande de comparer la requête “compiler program” avec `ClassicSimilarity` et notre version de TF-IDF.
+Nous avons utilisé la classe `ClassicSimilarity` pour tout le projet, sauf pour la dernière question qui demande de comparer la requête “compiler program” avec `ClassicSimilarity` et la nouvelle version basée sur TF-IDF expliqué dans la section "Tuning the Lucene Score".
 
 ##### indexed documents
 Tous les analyseurs indexent le même nombre de document, i.e le nombre de lignes de notre fichier, à savoir 3203.
