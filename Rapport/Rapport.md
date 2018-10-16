@@ -346,16 +346,16 @@ Searching for [compiler program]
 text of the query : summary:compil summary:program
 total number of results : 578
 
-2534: Design and Implementation of a Diagnostic Compiler for PL/I (9.992505)
-637: A NELIAC-Generated 7090-1401 Compiler (9.23983)
-2923: High-Level Data Flow Analysis (8.913862)
-2652: Reduction of Compilation Costs Through Language Contraction (8.752361)
-1647: WATFOR-The University of Waterloo FORTRAN IV Compiler (8.554615)
-1465: Program Translation Viewed as a General Data Processing Problem (7.781996)
-1988: A Formalism for Translator Interactions (7.781996)
-3189: An Algebraic Compiler for the FORTRAN Assembly Program (7.781996)
-1135: A General Business-Oriented Language Based on Decision Expressions* (6.9018097)
-1237: Conversion of Decision Tables To Computer Programs (6.9018097)
+2534: Design and Implementation of a Diagnostic Compiler for PL/I (7.411339)
+637: A NELIAC-Generated 7090-1401 Compiler (6.836161)
+2652: Reduction of Compilation Costs Through Language Contraction (6.555643)
+2923: High-Level Data Flow Analysis (6.465453)
+1647: WATFOR-The University of Waterloo FORTRAN IV Compiler (6.258721)
+1465: Program Translation Viewed as a General Data Processing Problem (5.8141103)
+1988: A Formalism for Translator Interactions (5.8141103)
+3189: An Algebraic Compiler for the FORTRAN Assembly Program (5.8141103)
+1135: A General Business-Oriented Language Based on Decision Expressions* (5.0494967)
+1237: Conversion of Decision Tables To Computer Programs (5.0494967)
 ```
 On obtient le même nombre de résultats en total ce qui est normal. Les poids changent donc l'ordre aussi mais les résultats restent assez similaires. On obtient 7 résultats sur 10 identiques à la première recherche.
 
